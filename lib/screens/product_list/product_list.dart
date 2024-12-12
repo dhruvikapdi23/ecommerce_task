@@ -21,28 +21,35 @@ class ProductList extends StatelessWidget {
           leading: const Icon(Icons.menu_open),
           actions: [const Icon(Icons.search).paddingSymmetric(horizontal: 20)],
         ),
-        body: PagedGridView<int,ProductModel>(shrinkWrap: true,
-padding: const EdgeInsets.symmetric(horizontal: 20),
+        body: PagedGridView<int, ProductModel>(
+            shrinkWrap: true,
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             pagingController: product.pagingController,
             builderDelegate: PagedChildBuilderDelegate(
-                itemBuilder: (context, item, index) => Column(crossAxisAlignment: CrossAxisAlignment.start,
-                  
-                  children: [
-                    CachedNetworkImage(imageUrl: item.images![0].baseUrl!,imageBuilder: (context, imageProvider) => Container(
-                      height: 100,
-                      width: MediaQuery.sizeOf(context).width,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(image: imageProvider,fit: BoxFit.cover),
-
-                      ),
-                    ),),
-                    const VSpace(5),
-                    Expanded(child: Text(item.name!,style: Get.textTheme.titleSmall!)),
-                    const VSpace(5),
-                    Text("${item.price!.formattedValue}",style: Get.textTheme.titleSmall!)
-                  ],
-                ).paddingOnly(bottom: 20)),
+                itemBuilder: (context, item, index) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CachedNetworkImage(
+                          imageUrl: item.images![0].baseUrl!,
+                          imageBuilder: (context, imageProvider) => Container(
+                            height: 100,
+                            width: MediaQuery.sizeOf(context).width,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                  image: imageProvider, fit: BoxFit.cover),
+                            ),
+                          ),
+                        ),
+                        const VSpace(5),
+                        Expanded(
+                            child: Text(item.name!,
+                                style: Get.textTheme.titleSmall!)),
+                        const VSpace(5),
+                        Text("${item.price!.formattedValue}",
+                            style: Get.textTheme.titleSmall!)
+                      ],
+                    ).paddingOnly(bottom: 20)),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisExtent: 170,
