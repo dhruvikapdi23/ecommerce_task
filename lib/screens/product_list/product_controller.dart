@@ -13,7 +13,7 @@ class ProductController extends GetxController {
   List<ProductModel> productList = [];
   static const pageSize = 10;
 
-  final PagingController<int, ProductModel> pagingController =
+  PagingController<int, ProductModel> pagingController =
       PagingController(firstPageKey: 0);
 
   @override
@@ -27,11 +27,13 @@ class ProductController extends GetxController {
 
   getProduct(int pageKey) async {
     CategoryController cat = Get.find<CategoryController>();
-    String list = cat.selectedCategory.join(":").toString();
-    log("list:$list");
+    String list = cat.type ?? "";
     if (list == "") {
       list = "ladies";
+    } else {
+      list = cat.type!;
     }
+    log("list1:$list");
     try {
       await apiServices
           .commonApi(
@@ -41,6 +43,7 @@ class ProductController extends GetxController {
           .then((value) {
         if (value.isSuccess!) {
           List newItems = value.data['results'];
+
           productList = newItems.map((e) => ProductModel.fromJson(e)).toList();
 
           final isLastPage = productList.length < pageSize;
@@ -51,10 +54,8 @@ class ProductController extends GetxController {
             pagingController.appendPage(productList, nextPageKey);
           }
 
-
-
           update();
-          log("list :${productList.length}");
+          log("list :${pagingController.itemList!.length}");
         } else {
           update();
         }

@@ -115,19 +115,19 @@ class ProductModel {
       });
     }
     if (json['swatches'] != null) {
-      swatches = <Null>[];
+      swatches = <dynamic>[];
       json['swatches'].forEach((v) {
         swatches!.add(v);
       });
     }
-    articleCodes = json['articleCodes'].cast<String>();
+    articleCodes = json['articleCodes']?.cast<String>();
     ticket = json['ticket'];
     searchEngineProductId = json['searchEngineProductId'];
     dummy = json['dummy'];
     linkPdp = json['linkPdp'];
     categoryName = json['categoryName'];
-    rgbColors = json['rgbColors'].cast<String>();
-    articleColorNames = json['articleColorNames'].cast<String>();
+    rgbColors = json['rgbColors']?.cast<String>();
+    articleColorNames = json['articleColorNames']?.cast<String>();
     ecoTaxValue = json['ecoTaxValue'] != null ?double.parse(json['ecoTaxValue'].toString()):null;
     swatchesTotal = json['swatchesTotal'];
     showPriceMarker = json['showPriceMarker'];
@@ -141,9 +141,9 @@ class ProductModel {
         galleryImages!.add(GalleryImages.fromJson(v));
       });
     }
-    allArticleCodes = json['allArticleCodes'].cast<String>();
-    allArticleImages = json['allArticleImages'].cast<String>();
-    allArticleBaseImages = json['allArticleBaseImages'].cast<String>();
+    allArticleCodes = json['allArticleCodes']?.cast<String>();
+    allArticleImages = json['allArticleImages']?.cast<String>();
+    allArticleBaseImages = json['allArticleBaseImages']?.cast<String>();
   }
 
   Map<String, dynamic> toJson() {

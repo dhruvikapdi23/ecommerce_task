@@ -29,16 +29,17 @@ class ProductList extends StatelessWidget {
                 itemBuilder: (context, item, index) => Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CachedNetworkImage(
-                          imageUrl: item.images![0].baseUrl!,
-                          imageBuilder: (context, imageProvider) => Container(
+
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(
+                            item.images![0].baseUrl!,
                             height: 100,
                             width: MediaQuery.sizeOf(context).width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                  image: imageProvider, fit: BoxFit.cover),
-                            ),
+                            cacheHeight: 500,
+                            cacheWidth: 300,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) => CircularProgressIndicator(),
                           ),
                         ),
                         const VSpace(5),

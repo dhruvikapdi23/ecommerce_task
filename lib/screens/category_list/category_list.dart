@@ -58,7 +58,7 @@ class CategoryList extends StatelessWidget {
                                         : AppColors.greyColor,
                                     borderRadius: BorderRadius.circular(5))
                                 .inkWell(
-                                    onTap: () => category.selectCategoryTap(d));
+                                    onTap: () => category.selectCategoryTap(d,c));
                           },
                           shrinkWrap: true,
                           itemCount: c.categoriesArray!.length,

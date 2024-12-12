@@ -9,6 +9,7 @@ import '../../services/api_service.dart.dart';
 class CategoryController extends GetxController {
   List<CategoryModel> categoryList = [];
   List selectedCategory =[];
+  String? type;
 
   @override
   void onInit() {
@@ -64,12 +65,13 @@ class CategoryController extends GetxController {
     }
   }
 
-  selectCategoryTap(CategoryModel cat) {
+  selectCategoryTap(CategoryModel cat,CategoryModel main) {
     if (selectedCategory.contains(cat.categoryValue)) {
       selectedCategory.remove(cat.categoryValue);
     } else {
       selectedCategory.add(cat.categoryValue);
     }
+    type= cat.tagCodes != null && cat.tagCodes!.isNotEmpty? cat.tagCodes![0]:cat.categoryValue;
     update();
     getProduct();
   }
@@ -78,6 +80,8 @@ class CategoryController extends GetxController {
     ProductController productController = Get.isRegistered<ProductController>()
         ? Get.find<ProductController>()
         : Get.put(ProductController());
+    productController.productList =[];
+    productController.pagingController.itemList =[];
     productController.getProduct(0);
   }
 }
